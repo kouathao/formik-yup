@@ -6,12 +6,14 @@ import * as Yup from "yup";
 const signUpSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
-  email: Yup.string().email().required("Email is required"),
+  email: Yup.string()
+    .email("Must be a valid email")
+    .required("Email is required"),
   password: Yup.string()
     .min(6, "Min of 6 characters")
     .required("Password is required"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords must match")
+    .oneOf([Yup.ref("password")], "Must match password")
     .required("Confirm Password is required"),
 });
 
